@@ -1,0 +1,18 @@
+plugins {
+    id 'com.axelor.app'
+}
+
+apply from: "../version.gradle"
+
+apply {
+    version = openSuiteVersion
+}
+
+axelor {
+    title "Axelor View Management Tool"
+    description "Manage views for custom Frontend"
+}
+
+dependencies {
+    api project(":modules:axelor-crm")
+}
