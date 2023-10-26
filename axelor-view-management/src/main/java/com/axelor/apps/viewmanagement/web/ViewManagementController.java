@@ -16,7 +16,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.Map;
 
-@Path("/ws/viewmanagement")
+@Path("/viewmanagement")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ViewManagementController{
@@ -25,7 +25,7 @@ public class ViewManagementController{
     @Inject
     private MetaService service;
     @POST
-    @Path("")
+    @Path("/home")
     public Response getView(Request request) {
         Map<String, Object> data = Maps.newHashMap();
 
