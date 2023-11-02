@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_6.1.xsd">
+
+  <menuitem name="menu-custom-view-management"
+            title="Custom View Management" />
+
+  <menuitem name="menu-manage-forms"
+            parent="menu-custom-view-management"
+            title="Manage forms"
+            action="custom-views-management"/>
+
+  <action-view name="custom-views-management"
+               title="Custom Views Management Tool"
+               model="com.axelor.meta.db.MetaView">
+    <view type="grid" name="manage-custom-view-grid"/>
+    <view type="form" name="manage-custom-view-form"/>
+  </action-view>
+
+  <menuitem name="menu-view-management-student"
+            parent="menu-custom-view-management"
+            title="Manage students"
+            action="custom-views-management-student"/>
+
+  <action-view name="custom-views-management-student" model="com.axelor.apps.viewmanagement.db.Student" title="Student">
+    <view name="view-management-student-grid" type="grid"/>
+    <view name="view-management-student-form" type="form"/>
+  </action-view>
+
+</object-views>
