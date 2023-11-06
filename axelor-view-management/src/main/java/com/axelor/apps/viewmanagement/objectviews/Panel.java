@@ -64,6 +64,7 @@ public class Panel
 
     protected Menu menu;
     @XmlElements({
+        @XmlElement(name = "myElement", type = MyElement.class),
         @XmlElement(name = "field", type = PanelField.class),
         @XmlElement(name = "label", type = Label.class),
         @XmlElement(name = "help", type = Help.class),

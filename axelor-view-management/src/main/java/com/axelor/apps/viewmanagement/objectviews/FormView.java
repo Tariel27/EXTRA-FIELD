@@ -44,6 +44,8 @@ public class FormView
     protected String name;
     @XmlAttribute(name = "model", required = true)
     protected String model;
+    @XmlAttribute(name = "myAttribute", required = false)
+    protected String myAttribute;
     @XmlAttribute(name = "editable")
     protected Boolean editable;
 
@@ -106,18 +108,20 @@ public class FormView
     public String getModel() {
         return model;
     }
-
     /**
      * Sets the value of the model property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setModel(String value) {
         this.model = value;
     }
+
+    public String getMyAttribute() { return myAttribute; }
+    public void setMyAttribute(String value) { this.myAttribute = value; }
 
     /**
      * Gets the value of the editable property.
