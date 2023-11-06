@@ -23,9 +23,14 @@
             title="Manage students"
             action="custom-views-management-student"/>
 
+  <menuitem name="menu-view-management-student"
+            parent="menu-custom-view-management"
+            title="Manage students - Dashboard"
+            action="viewmanagement-custom-student-menu-item"/>
+
   <action-view name="custom-views-management-student" model="com.axelor.apps.viewmanagement.db.Student" title="Student">
     <view name="view-management-student-grid" type="grid"/>
-    <view name="view-management-student-form" type="form"/>
+    <view name="view-management-student-form-custom" type="form"/>
   </action-view>
 
 </object-views>
