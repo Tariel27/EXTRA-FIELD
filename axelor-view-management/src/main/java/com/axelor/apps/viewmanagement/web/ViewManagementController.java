@@ -68,10 +68,22 @@ public class ViewManagementController{
                 }
 
             } catch (JAXBException e) {
-                LOG.debug("getView method. RuntimeException raised while unmarshalling given data. Message is: "+e.getCause().getLocalizedMessage());
+                String message = null;
+                if(e.getCause() == null){
+                    message = e.getLocalizedMessage();
+                }else{
+                    message = e.getCause().getLocalizedMessage();
+                }
+                LOG.debug("getView method. RuntimeException raised while unmarshalling given data. Message is: "+message);
                 data.put("view", null);
             } catch (IOException e) {
-                LOG.debug("getView method. IOException raised while unmarshalling given data. Message is: "+e.getCause().getLocalizedMessage());
+                String message = null;
+                if(e.getCause() == null){
+                    message = e.getLocalizedMessage();
+                }else{
+                    message = e.getCause().getLocalizedMessage();
+                }
+                LOG.debug("getView method. IOException raised while unmarshalling given data. Message is: "+message);
                 data.put("view", null);
             }
         }
@@ -103,10 +115,16 @@ public class ViewManagementController{
             }
 
         }catch (Exception e) {
+            String message = null;
+            if(e.getCause() == null){
+                message = e.getLocalizedMessage();
+            }else{
+                message = e.getCause().getLocalizedMessage();
+            }
             ActionValidateBuilder validateBuilder =
-                    new ActionValidateBuilder(ValidatorType.ERROR).setMessage(e.getCause().getLocalizedMessage());
+                    new ActionValidateBuilder(ValidatorType.ERROR).setMessage(message);
             data.putAll(validateBuilder.build());
-            LOG.debug("validateView method. Error validating the given xml. Message: "+e.getCause().getLocalizedMessage());
+            LOG.debug("validateView method. Error validating the given xml. Message: "+message);
         }
 
         response.setData(ImmutableList.of(data));
