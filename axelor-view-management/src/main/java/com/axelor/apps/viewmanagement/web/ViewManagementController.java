@@ -40,6 +40,7 @@ public class ViewManagementController{
     @POST
     @Path("/home")
     public Response getView(Request request) {
+        LOG.debug("Get view method started");
         Map<String, Object> data = Maps.newHashMap();
 
         final String model = request.getModel();
@@ -49,26 +50,28 @@ public class ViewManagementController{
         final String xmlString = viewManagementFindViewService.getViewXml(name, type, model);
 
         if(xmlString == null){
-            LOG.debug("Requested view have not been found");
+            LOG.debug("getView method. Requested view have not been found");
             data.put("view", null);
         }else {
             final AbstractView view;
             try {
+                LOG.debug("getView method. Starting an attempt to unmarshall the given form's xml");
                 ObjectViews objectView = viewManagementMarshallerService.unmarshal(xmlString);
 
                 if(objectView == null) {
-                    LOG.debug("Xml config data hove not been found");
+                    LOG.debug("getView method. Could not unmarshall xml. Reason: Xml config data hove not been found");
                     data.put("view", null);
                 } else{
+                    LOG.debug("getView method. Unmarshalling finished successfully. Casting objectView to AbstractView");
                     view = (AbstractView) objectView.getFormOrGridOrTree().get(0);
                     data.put("view", view);
                 }
 
             } catch (JAXBException e) {
-                LOG.debug("RuntimeException raised while unmarshalling given data. Message is: "+e.getMessage());
+                LOG.debug("getView method. RuntimeException raised while unmarshalling given data. Message is: "+e.getCause().getLocalizedMessage());
                 data.put("view", null);
             } catch (IOException e) {
-                LOG.debug("IOException raised while unmarshalling given data. Message is: "+e.getMessage());
+                LOG.debug("getView method. IOException raised while unmarshalling given data. Message is: "+e.getCause().getLocalizedMessage());
                 data.put("view", null);
             }
         }
@@ -80,18 +83,21 @@ public class ViewManagementController{
     }
 
     public void validateView(ActionRequest request, ActionResponse response){
+        LOG.debug("Validate view method started");
         Map<String, Object> data = Maps.newHashMap();
         MetaView metaView = request.getContext().asType(MetaView.class);
         String xmlString = metaView.getXml();
 
         AbstractView view = null;
         try {
+            LOG.debug("validateView method. Starting an attempt to unmarshall the given form's xml");
             ObjectViews objectView = viewManagementMarshallerService.unmarshal(xmlString);
 
             if(objectView == null) {
-                LOG.debug("Xml config data hove not been found");
+                LOG.debug("validateView method. Could not unmarshall xml. Reason: Xml config data hove not been found");
                 data.put("view", null);
             } else{
+                LOG.debug("validateView method. Unmarshalling finished successfully. Casting objectView to AbstractView");
                 view = (AbstractView) objectView.getFormOrGridOrTree().get(0); // this string is needed in case if casting the type will not work properly
                 //data.put("view", view);
             }
@@ -100,6 +106,7 @@ public class ViewManagementController{
             ActionValidateBuilder validateBuilder =
                     new ActionValidateBuilder(ValidatorType.ERROR).setMessage(e.getCause().getLocalizedMessage());
             data.putAll(validateBuilder.build());
+            LOG.debug("validateView method. Error validating the given xml. Message: "+e.getCause().getLocalizedMessage());
         }
 
         response.setData(ImmutableList.of(data));
