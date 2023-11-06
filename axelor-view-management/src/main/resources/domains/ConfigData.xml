@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_6.1.xsd">
+
+  <module name="viewmanagement" package="com.axelor.apps.viewmanagement.db"/>
+
+  <entity name="ConfigData">
+    <string name="name"/>
+    <string name="value"/>
+    <string name="description"/>
+  </entity>
+
+</domain-models>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_6.1.xsd">
+
+    <grid name="manage-custom-view-grid" title="Custom Views Management Tool" model="com.axelor.meta.db.MetaView" orderBy="priority,name" edit-icon="true">
+        <toolbar>
+            <button name="restoreAll" help="Restore all…" icon="fa-undo" prompt="All the customizations will be lost. Are you sure?" onClick="action-meta-restore-all"/>
+        </toolbar>
+        <hilite color="warning" if="extension"/>
+        <hilite color="info" if="computed"/>
+        <field name="name"/>
+        <field name="title"/>
+        <field name="type"/>
+        <field name="model"/>
+        <field name="module"/>
+        <field name="extension" hidden="true"/>
+        <field name="computed" hidden="true"/>
+        <field name="priority" width="75"/>
+    </grid>
+
+    <form name="manage-custom-view-form" title="Custom Views Management Tool" model="com.axelor.meta.db.MetaView" width="large" onSave="action-viewmanagement-validate,com.axelor.meta.web.MetaController:clearCache" onNew="action-view-defaults">
+    <panel title="Overview">
+        <panel>
+            <field name="name" colSpan="12"/>
+            <field name="title" colSpan="12"/>
+            <field name="type"/>
+            <field name="priority"/>
+            <field name="helpLink" colSpan="12"/>
+        </panel>
+        <panel itemSpan="12">
+            <field name="model"/>
+            <field name="module"/>
+            <field name="groups" widget="TagSelect" x-create="code,name"/>
+            <panel showIf="['form', 'grid'].indexOf(type) >= 0">
+                <field name="extension"/>
+                <field name="computed"/>
+            </panel>
+        </panel>
+    </panel>
+    <panel title="Schema">
+        <field name="xml" showTitle="false" colSpan="12" height="500" widget="CodeEditor" x-code-syntax="xml"/>
+    </panel>
+    </form>
+
+    <action-method name="action-viewmanagement-validate">
+        <call method="validateView" class="com.axelor.apps.viewmanagement.web.ViewManagementController"/>
+    </action-method>
+</object-views>

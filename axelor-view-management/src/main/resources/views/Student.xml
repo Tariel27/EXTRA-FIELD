@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_6.1.xsd">
+
+    <grid name="view-management-student-grid"
+          title="Students list"
+          model="com.axelor.apps.viewmanagement.db.Student">
+        <field name="firstName" />
+        <field name="secondName" />
+        <field name="yearLEvel" />
+    </grid>
+
+    <form name="view-management-student-form"
+          title="Students list"
+          model="com.axelor.apps.viewmanagement.db.Student">
+        <panel>
+            <field name="firstName" />
+            <field name="secondName" />
+            <field name="yearLEvel" />
+        </panel>
+
+    </form>
+
+    <form name="view-management-student-form-custom"
+          title="Students list"
+          model="com.axelor.apps.viewmanagement.db.Student">
+        <panel-dashlet action="viewmanagement-custom-student" colSpan="12" height="700"/>
+    </form>
+
+    <action-view name="viewmanagement-custom-student-menu-item" title="Student Custom Dashboard">
+        <view name="viewmanagement-student-dashboard" type="dashboard"/>
+    </action-view>
+
+    <action-view name="viewmanagement-custom-student" model="com.axelor.apps.viewmanagement.db.Student" title="Student">
+        <view name="viewmanagement-custom-student" type="custom"/>
+    </action-view>
+
+    <dashboard name="viewmanagement-student-dashboard" title="Welcome to Student dashboard!">
+        <dashlet action="viewmanagement-custom-student"/>
+    </dashboard>
+
+    <custom name="viewmanagement-custom-student" title="Student">
+
+        <!-- dataset is required -->
+        <dataset type="rpc">
+
+        </dataset>
+
+        <!-- template is require -->
+        <template>
+            <![CDATA[
+                <div>
+                    <h1>This is a custom view. Student form</h1>
+                </div>
+
+                <iframe src="http://pi.customs.gov.kg" title="Frontend frame" width=100% height=100%></iframe>
+            ]]>
+        </template>
+    </custom>
+</object-views>
