@@ -1,5 +1,7 @@
 package com.axelor.apps.viewmanagement.service;
 
+import com.axelor.meta.db.MetaFile;
+
 public interface ViewManagementImportExportService {
-    public String exportViews(String module);
+    public MetaFile exportViews(String module);
 }

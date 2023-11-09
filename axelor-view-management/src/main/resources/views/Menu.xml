@@ -33,4 +33,14 @@
     <view name="view-management-student-form-custom" type="form"/>
   </action-view>
 
+  <menuitem name="menu-view-management-backup"
+            parent="menu-custom-view-management"
+            title="Backup views"
+            action="views-management-backup-action-view"/>
+
+  <action-view name="views-management-backup-action-view" model="com.axelor.apps.viewmanagement.db.ViewManagementBackup" title="Backup views">
+    <view name="view-management-backup-grid" type="grid"/>
+    <view name="view-management-backup-form" type="form"/>
+  </action-view>
+
 </object-views>

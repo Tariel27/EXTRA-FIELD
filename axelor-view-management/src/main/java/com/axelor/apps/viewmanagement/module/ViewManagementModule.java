@@ -19,9 +19,11 @@
 package com.axelor.apps.viewmanagement.module;
 
 import com.axelor.app.AxelorModule;
+import com.axelor.apps.viewmanagement.service.ViewManagementCreateBackupService;
 import com.axelor.apps.viewmanagement.service.ViewManagementImportExportService;
 import com.axelor.apps.viewmanagement.service.ViewManagementFindViewService;
 import com.axelor.apps.viewmanagement.service.ViewManagementMarshallerService;
+import com.axelor.apps.viewmanagement.service.impl.ViewManagementCreateBackupServiceImpl;
 import com.axelor.apps.viewmanagement.service.impl.ViewManagementImportExportServiceImpl;
 import com.axelor.apps.viewmanagement.service.impl.ViewManagementFindViewServiceImpl;
 import com.axelor.apps.viewmanagement.service.impl.ViewManagementMarshallerServiceImpl;
@@ -34,6 +36,7 @@ public class ViewManagementModule extends AxelorModule {
     bind(ViewManagementMarshallerService.class).to(ViewManagementMarshallerServiceImpl.class);
     bind(ViewManagementFindViewService.class).to(ViewManagementFindViewServiceImpl.class);
     bind(ViewManagementImportExportService.class).to(ViewManagementImportExportServiceImpl.class);
+    bind(ViewManagementCreateBackupService.class).to(ViewManagementCreateBackupServiceImpl.class);
 
   }
 }

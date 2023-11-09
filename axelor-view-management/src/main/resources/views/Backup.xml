@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_6.1.xsd">
+
+    <grid name="view-management-backup-grid"
+          title="Backup views"
+          model="com.axelor.apps.viewmanagement.db.ViewManagementBackup">
+        <field name="moduleName" />
+        <field name="backupMetaFile" />
+        <field name="createdOn" />
+    </grid>
+
+    <form name="view-management-backup-form"
+          title="Backup views"
+          model="com.axelor.apps.viewmanagement.db.ViewManagementBackup">
+        <panel>
+            <field name="moduleName" />
+            <field name="backupMetaFile" />
+            <field name="createdOn" />
+        </panel>
+        <panel>
+            <button name="createBackup" title="Create" onClick="view-management-backup-create-action-group"/>
+        </panel>
+    </form>
+
+    <action-group name="view-management-backup-create-action-group">
+        <action name="view-management-backup-create-action"/>
+    </action-group>
+
+    <action-method name="view-management-backup-create-action">
+        <call class="com.axelor.apps.viewmanagement.web.ImportExportController" method="exportViews"/>
+    </action-method>
+</object-views>
