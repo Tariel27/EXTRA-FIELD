@@ -22,7 +22,7 @@ public class ViewManagementFindViewServiceImpl implements ViewManagementFindView
         return view.getXml();
     }
 
-    private static MetaView findMetaView(
+    private MetaView findMetaView(
             MetaViewRepository views, String name, String type, String model) {
         final List<String> select = new ArrayList<>();
         if (name != null) {
