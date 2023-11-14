@@ -17,13 +17,11 @@ import com.google.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 @Path("/viewmanagement")
@@ -128,5 +126,73 @@ public class ViewManagementController{
         }
 
         response.setData(ImmutableList.of(data));
+    }
+
+    @GET
+    @Path("/knime")
+    public Response checkKnime(Request request) {
+        Response response = new Response();
+        Map<String, Object> requestData = request.getData();
+        String executable = null;
+        if (requestData.containsKey("command")){
+            executable = (String) requestData.get("command");
+        }
+        String argument1 = null;
+        if (requestData.containsKey("first")){
+            argument1 = (String) requestData.get("first");
+        }
+        String argument2 = null;
+        if (requestData.containsKey("second")){
+            argument2 = (String) requestData.get("second");
+        }
+        String argument3 = null;
+        if (requestData.containsKey("third")){
+            argument3 = (String) requestData.get("third");
+        }
+        String argument4 = null;
+        if (requestData.containsKey("fourth")){
+            argument4 = (String) requestData.get("fourth");
+        }
+
+        String argument5 = null;
+        if (requestData.containsKey("fourth")){
+            argument5 = (String) requestData.get("fives");
+        }
+
+        String[] executeWorkflow = {executable, argument1,argument2,argument3,argument4,argument5};
+
+        Map<String, Object> data = Maps.newHashMap();
+
+        // Specify the KNIME executable path and command
+        String knimeExecutable = "C:\\Program Files\\KNIME\\knime.exe";
+        String[] command = {
+                knimeExecutable,
+                "-nosplash",
+                "-application",
+                "org.knime.product.KNIME_BATCH_APPLICATION",
+                "-workflowFile=\"C:\\Users\\Kasym\\Documents\\Sample csv\\DB_connection_Example.knwf\"",
+                "-reset"
+        };
+
+        // Create a ProcessBuilder
+        ProcessBuilder processBuilder = new ProcessBuilder(executeWorkflow);
+
+        try {
+            // Start the process
+            Process process = processBuilder.start();
+
+            // You can wait for the process to complete using the waitFor() method
+            int exitCode = process.waitFor();
+
+            data.put("knime_exit_code",exitCode);
+            // Print the exit code
+
+        } catch (IOException | InterruptedException e) {
+            data.put("error", e.getMessage());
+            e.printStackTrace();
+        }
+
+        response.setData(data);
+        return response;
     }
 }
